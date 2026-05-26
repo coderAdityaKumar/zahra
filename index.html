@@ -1017,7 +1017,7 @@
   <!-- Letter Section -->
   <section>
     <div class="quote-box">
-      <h2>Dear Raraaaaa 🌙💌</h2>
+      <h2>Dear Raraaaaa 🌙</h2>
 
       <p>
         I still don't fully believe you're Indonesian… 😂💕
@@ -1213,6 +1213,103 @@
 
     console.log('💖✨ Welcome to Raraaaaa\'s special corner! Made with lots of love 🌸🦋');
     console.log('🎵 Music player is ready! Click play on any song to start listening!');
+
   </script>
+
+  <script>
+  // 🌙 Hidden Moon Easter Egg
+  function setupMoonEasterEgg() {
+    const allElements = document.querySelectorAll("*");
+
+    allElements.forEach(el => {
+      if (el.childNodes.length) {
+        el.childNodes.forEach(node => {
+          if (
+            node.nodeType === 3 &&
+            node.textContent.includes("🌙")
+          ) {
+            const span = document.createElement("span");
+
+            span.innerHTML = node.textContent.replaceAll(
+              "🌙",
+              `<span class="moon-secret">🌙</span>`
+            );
+
+            node.replaceWith(span);
+          }
+        });
+      }
+    });
+
+    document.querySelectorAll(".moon-secret").forEach(moon => {
+      moon.style.cursor = "pointer";
+
+      moon.addEventListener("click", () => {
+        activateMoonSecret();
+      });
+    });
+  }
+
+  function activateMoonSecret() {
+    const overlay = document.createElement("div");
+
+    overlay.innerHTML = `
+      <div style="
+        position:fixed;
+        inset:0;
+        background:rgba(15,15,25,0.72);
+        backdrop-filter:blur(8px);
+        z-index:99999;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        animation:fadeIn 0.5s ease;
+      ">
+        <div style="
+          background:rgba(255,255,255,0.12);
+          border:1px solid rgba(255,255,255,0.2);
+          backdrop-filter:blur(18px);
+          padding:35px;
+          border-radius:28px;
+          text-align:center;
+          max-width:320px;
+          color:white;
+          box-shadow:0 0 40px rgba(255,255,255,0.15);
+        ">
+          <div style="font-size:60px;margin-bottom:10px;">
+            🌙✨
+          </div>
+
+          <h2 style="
+            margin-bottom:15px;
+            color:#ffd6e5;
+          ">
+            Secret Found
+          </h2>
+
+          <p style="
+            line-height:1.8;
+            color:#fff;
+          ">
+            The moon told me you smiled after opening this 🌙✨
+          </p>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+
+    // extra stars
+    for (let i = 0; i < 35; i++) {
+      createFloatingHeart();
+    }
+
+    setTimeout(() => {
+      overlay.remove();
+    }, 10000);
+  }
+
+  setupMoonEasterEgg();
+</script>
 </body>
 </html>
